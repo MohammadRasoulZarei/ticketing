@@ -160,6 +160,7 @@ return [
         'tag_ids'              => 'تگ ها',
         'comment'              => ' دیدگاه',
         'address_id'              => ' آدرس',
+        'role'              => ' نقش',
     ],
 
 ];

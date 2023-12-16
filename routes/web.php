@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Home\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test',function(){
-    return view('admin.layouts.admin');
+    return view('auth.login');
 });
 Route::get('/', function () {
-    return view('welcome');
-})->name('login');
+    if (auth()->check()) {
+        return to_route('panel.tickets.index');
+    }else{
+        return redirect('login');
+    }
 
+});
+
+Route::prefix('panel')->middleware('auth')->name('panel.')->group(function(){
+    Route::get('tikckts',[TicketController::class,'index'])->name('tickets.index');
+});
+
+Route::get('logout',function(){
+    auth()->logout();
+    return redirect('/');
+});

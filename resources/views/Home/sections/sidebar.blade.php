@@ -31,6 +31,7 @@
             </li>
 
             <li><a href="#"><i class="fa fa-book"></i> <span>مستندات</span></a></li>
+            <li><a href="{{url('logout')}}"><i class="fa fa-book"></i> <span style="color: red">خروج</span></a></li>
 
         </ul>
     </section>
