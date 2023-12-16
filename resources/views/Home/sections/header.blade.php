@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">کاربر</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>کاربر ساده</b></span>
+        <span class="logo-lg"><b> پنل کاربری</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -65,7 +65,7 @@
                     </ul>
                 </li>
                 <!-- Tasks: style can be found in dropdown.less -->
-              
+
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

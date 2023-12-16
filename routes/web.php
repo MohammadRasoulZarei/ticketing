@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Home\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Home\TicketController;
+use App\Http\Controllers\Admin\TicketController as AdminTicket;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test',function(){
-    return view('auth.login');
+    return view('home.tickets.show');
 });
 Route::get('/', function () {
     if (auth()->check()) {
@@ -28,7 +29,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('panel')->middleware('auth')->name('panel.')->group(function(){
-    Route::get('tikckts',[TicketController::class,'index'])->name('tickets.index');
+    Route::resource('tickets',TicketController::class);
+});
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function(){
+    Route::resource('tickets',AdminTicket::class);
 });
 
 Route::get('logout',function(){

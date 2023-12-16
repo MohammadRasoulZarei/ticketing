@@ -7,7 +7,7 @@
                 <img src="{{asset('assets/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-right info">
-                <p>نام کاربر
+                <p> {{auth()->user()->name}}
                 </p>
                 <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
             </div>
@@ -24,13 +24,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> لیست تیکت ها
+                    <li class="active"><a href="{{route('panel.tickets.index')}}"><i class="fa fa-circle-o"></i> لیست تیکت ها
                             </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> ساخت تیکت جدید </a></li>
+                    <li><a href="{{route('panel.tickets.create')}}"><i class="fa fa-circle-o"></i> ساخت تیکت جدید </a></li>
                 </ul>
             </li>
 
-            <li><a href="#"><i class="fa fa-book"></i> <span>مستندات</span></a></li>
+
             <li><a href="{{url('logout')}}"><i class="fa fa-book"></i> <span style="color: red">خروج</span></a></li>
 
         </ul>
