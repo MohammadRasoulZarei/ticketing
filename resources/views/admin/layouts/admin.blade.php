@@ -14,20 +14,20 @@
     <link rel="stylesheet" href="{{ asset('assets/home/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/home/css/AdminLTE.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/home/css/_all-skins.min.css') }}">
-
     @yield('style')
+
 
     <!-- Google Font -->
     {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> --}}
 </head>
 
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 
-        @include('Home.sections.header')
+        @include('admin.sections.header')
         <!-- right side column. contains the logo and sidebar -->
-       @include('Home.sections.sidebar')
+       @include('admin.sections.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
