@@ -89,7 +89,10 @@
         $(document).ready(function() {
             $('.sidebar-menu').tree()
         })
+
     </script>
+    @include('sweetalert::alert')
+
     @yield('script')
 </body>
 

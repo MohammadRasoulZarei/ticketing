@@ -2,35 +2,37 @@
 @section('title', 'ایجا تیکت ')
 
 @section('content')
-    <form>
+    @include('home.sections.errors')
+    <form action="{{route('panel.tickets.store')}}" enctype="multipart/form-data" method="POST">
+        @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">موضوع</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                <input type="text" name="subject" class="form-control" id="inputEmail4" placeholder="موضوع">
             </div>
             <div class="form-group col-md-6">
-                <div class="custom-file ">
-                    <label class="custom-file-label" for="customFileLang"> فایل ضمیمه</label>
-                    <input type="file" class="custom-file-input form-control" id="customFileLang" lang="es">
+                <div class="custom-file">
+                    <label class="custom-file-label"  for="customFileLang"> فایل ضمیمه</label>
+                    <input type="file" name="attachment" class=" custom-file-input form-control" id="customFileLang">
                 </div>
             </div>
         </div>
         <div class="clearfix"></div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                    <option selected>واحد مدنظر را انتخاب کنید</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select name="department_id" class="custom-select  form-control-lg col-md-12 col-sm-12">
+                    <option value="">واحد مدنظر را انتخاب کنید</option>
+                    @foreach ($departments as $department)
+                    <option value="{{$department->id}}">{{$department->name}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                    <option selected>اولویت را انتخاب کنید</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select name="priority" class="custom-select  form-control-lg col-md-12 col-sm-12">
+                    <option value="">اولویت را انتخاب کنید</option>
+                    <option value="top">بالا</option>
+                    <option value="mid">متوسط</option>
+                    <option value="low">پایین</option>
                 </select>
             </div>
 
@@ -38,7 +40,7 @@
 
         <div class="form-group col-md-12">
             <label for="exampleFormControlTextarea1">متن پیام</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
         </div>
 
         <div class="clearfix"></div>

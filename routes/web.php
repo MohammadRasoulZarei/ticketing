@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -17,7 +18,10 @@ use App\Http\Controllers\Admin\TicketController as AdminTicket;
 |
 */
 Route::get('/test',function(){
-    return view('home.tickets.show');
+    //dd(Carbon::now()->format('Y_m_d_H_i_s_u'));
+    dd(uniqeFileName('rasou'));
+
+    //return view('home.tickets.show');
 });
 Route::get('/', function () {
     if (auth()->check()) {

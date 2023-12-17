@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TicketMessages extends Model
+class Message extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $tabel='messages';
+    protected $guarded=[];
 }

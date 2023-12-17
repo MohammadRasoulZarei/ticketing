@@ -1,7 +1,7 @@
 @extends('home.layouts.home')
 @section('title','لیست تیکت ها')
 @section('subject')
-تعداد تیکت ها(20)
+تعداد تیکت ها({{$tickets->total()}})
 @endsection
 @section('content')
 <div >
@@ -9,6 +9,7 @@
         <thead>
           <tr>
             <th scope="col">ردیف</th>
+            <th scope="col">تاریخ ایجاد</th>
             <th scope="col">موضوع</th>
             <th scope="col">واحد</th>
             <th scope="col">اولویت</th>
@@ -17,39 +18,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>خظای فنی</td>
-            <td>فنی</td>
-            <td>بالا</td>
-            <td>بی پاسخ</td>
-            <td>
-                <a href="#" class="btn btn-primary">نمایش</a>
-                <a href="#" class="btn btn-danger">حذف</a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>خظای فنی</td>
-            <td>فنی</td>
-            <td>بالا</td>
-            <td>بی پاسخ</td>
-            <td>
-                <a href="#" class="btn btn-primary">نمایش</a>
-                <a href="#" class="btn btn-danger">حذف</a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>خظای فنی</td>
-            <td>فنی</td>
-            <td>بالا</td>
-            <td>بی پاسخ</td>
-            <td>
-                <a href="#" class="btn btn-primary">نمایش</a>
-                <a href="#" class="btn btn-danger">حذف</a>
-            </td>
-          </tr>
+            @foreach ($tickets as $key=> $ticket)
+            <tr>
+              <th scope="row">{{$tickets->firstItem()+$key}}</th>
+              <td>{{zaman($ticket->created_at)}}</td>
+              <td>{{$ticket->subject}}</td>
+              <td>{{$ticket->department->name}}</td>
+              <td>{{$ticket->priority_value}}</td>
+              <td>{{$ticket->status_value}}</td>
+              <td>
+                  <a href="{{route('panel.tickets.show',$ticket->id)}}" class="btn btn-primary">نمایش</a>
+                  <a href="#" class="btn btn-danger">حذف</a>
+              </td>
+            </tr>
+            @endforeach
+
 
         </tbody>
       </table>
