@@ -19,10 +19,10 @@ use App\Http\Controllers\Admin\TicketController as AdminTicket;
 */
 Route::get('/test',function(){
     //dd(Carbon::now()->format('Y_m_d_H_i_s_u'));
-    dd(uniqeFileName('rasou'));
+  //  dd(auth()->user()->role);
 
     //return view('home.tickets.show');
-});
+})->middleware('admin');
 Route::get('/', function () {
     if (auth()->check()) {
         return to_route('panel.tickets.index');
@@ -33,9 +33,12 @@ Route::get('/', function () {
 });
 
 Route::prefix('panel')->middleware('auth')->name('panel.')->group(function(){
-    Route::resource('tickets',TicketController::class);
+    Route::get('tickets',[TicketController::class,'index'])->name('tickets.index');
+    Route::post('tickets',[TicketController::class,'store'])->name('tickets.store');
+    Route::get('tickets/create',[TicketController::class,'create'])->name('tickets.create');
+    Route::match(['get', 'post'],'tickets/{ticket}',[TicketController::class,'show'])->name('tickets.show');
 });
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function(){
+Route::prefix('admin')->middleware(['auth','admin'])->name('admin.')->group(function(){
     Route::resource('tickets',AdminTicket::class);
 });
 

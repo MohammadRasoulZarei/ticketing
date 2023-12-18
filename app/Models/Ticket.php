@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Message;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,5 +46,8 @@ class Ticket extends Model
                 return 'پایین';
                 break;
         }
+    }
+    public function messages(){
+        return $this->hasMany(Message::class);
     }
 }

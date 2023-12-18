@@ -39,4 +39,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getRoleValueAttribute(){
+        switch ($this->role) {
+            case 'admin':
+                return 'ادمین';
+                break;
+            case 'user':
+                return 'کاربر';
+                break;
+        }
+    }
 }
