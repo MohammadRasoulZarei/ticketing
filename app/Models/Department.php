@@ -9,4 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Department extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $tabel='departments';
+    protected $guarded=[];
 }

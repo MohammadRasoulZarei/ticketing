@@ -27,7 +27,7 @@
                         <p class="mb-2"><span class="bold">وضعیت تیکت:</span>&nbsp;<span style="color:#888888">
                                 {{$ticket->status_value}}</span></p>
                         <p class="mb-2 reg_date"><span class="bold">زمان ایجاد</span>{{zaman($ticket->created_at)}}</p>
-                        <p class="mb-2 last_update"><span class="bold">آخرین پاسخ ادمین: </span>{{$pastTime}}  </p>
+                        <p class="mb-2 last_update"><span class="bold">آخرین پیام : </span>{{$pastTime}}  </p>
                     </div>
                 </div>
             </div>

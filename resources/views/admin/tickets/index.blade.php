@@ -15,120 +15,112 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <form action="" class="pt-5">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                                <option selected>اولویت</option>
-                                <option value="1">بالا</option>
-                                <option value="2">متوسط</option>
-                                <option value="3">پایین</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                                <option selected>وضعیت</option>
-                                <option value="1">بی جواب</option>
-                                <option value="2">جواب داده شده</option>
-                                <option value="3">منتظر پاسخ</option>
-                                <option value="3">بسته</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                                <option selected>ترتیب</option>
-                                <option value="1">جدیدترین</option>
-                                <option value="2">قدیمی ترین</option>
+
+                <div class="form-row pt-5">
+                    <div class="form-group col-md-4">
+                        <select target='#priority-input'
+                            class="custom-select select-filter  form-control-lg col-md-12 col-sm-12">
+                            <option value="">اولویت</option>
+                            <option @selected(request()->has('priority') and request()->priority=='top') value="top">بالا</option>
+                            <option @selected(request()->has('priority') and request()->priority=='mid') value="mid">متوسط</option>
+                            <option @selected(request()->has('priority') and request()->priority=='low') value="low">پایین</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select target='#status-input'
+                            class="custom-select select-filter form-control-lg col-md-12 col-sm-12">
+                            <option value="">وضعیت</option>
+                            <option @selected(request()->has('status') and request()->status=='unanswered') value="unanswered">بی جواب</option>
+                            <option @selected(request()->has('status') and request()->status=='answered') value="answered">جواب داده شده</option>
+                            <option @selected(request()->has('status') and request()->status=='checking') value="checking">منتظر پاسخ</option>
+                            <option @selected(request()->has('status') and request()->status=='closed') value="closed">بسته</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select " target='#order-input' class="custom-select select-filter form-control-lg col-md-12 col-sm-12">
+                                <option value="">ترتیب</option>
+                                <option @selected(request()->has('order') and request()->order=='newest') value="newest">جدیدترین</option>
+                                <option @selected(request()->has('order') and request()->order=='oldest')  value="oldest">قدیمی ترین</option>
                             </select>
                         </div>
 
                     </div>
                     <div class="clearfix"></div>
-                    <div style="display: flex">
+                    <form action=""  class="pt-2">
+                        <input type="hidden" id='priority-input' name="priority" disabled>
+                        <input type="hidden" id="status-input" name="status" disabled>
+                        <input type="hidden" id="order-input" name="order" disabled>
+                        <div style="display: flex">
 
-                        <div class="form-check form-check-inline col-md-3 ">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1">واحد مهندسی</label>
-                        </div>
-                        <div class="form-check form-check-inline col-md-3 ">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">واحد مهندسی</label>
-                        </div>
-                        <div class="form-check form-check-inline col-md-3 ">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3">واحد مهندسی</label>
-                        </div>
-                        <div class="form-check form-check-inline col-md-3 ">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox4">واحد مهندسی</label>
-                        </div>
+                             @foreach ($userDepartments as $department)
+
+                            <div class="form-check form-check-inline col-md-3 ">
+                                <input @checked(request()->has('departments') and in_array($department->id,request('departments'))) class="form-check-input check-input-{{$department->id}}" name="departments[]" type="checkbox"
+                                    id="inlineCheckbox{{ $department->id }}" value="{{ $department->id }}">
+                                <label class="form-check-label" for="inlineCheckbox{{ $department->id }}">
+                                    {{ $department->name }}</label>
+                            </div>
+                            @endforeach
+
                     </div>
 
                     <div class="clearfix"></div>
-
-
-
 
                     <div class="form-group col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">فیلتر</button>
                     </div>
 
-                </form>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">ردیف</th>
-                            <th scope="col">تاریخ شروع</th>
-                            <th scope="col">موضوع</th>
-                            <th scope="col">واحد</th>
-                            <th scope="col">اولویت</th>
-                            <th scope="col">وضعیت</th>
-                            <th scope="col">عملیات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>22/09/1349 12:18</td>
-                            <td>خظای فنی</td>
-                            <td>فنی</td>
-                            <td>بالا</td>
-                            <td>بی پاسخ</td>
-                            <td>
-                                <a href="#" class="btn btn-primary">نمایش</a>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ردیف</th>
+                                <th scope="col">تاریخ شروع</th>
+                                <th scope="col"> فرستنده</th>
+                                <th scope="col">موضوع</th>
+                                <th scope="col">واحد</th>
+                                <th scope="col">اولویت</th>
+                                <th scope="col">وضعیت</th>
+                                <th scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tickets as $key=> $ticket)
+                            <tr>
+                              <th scope="row">{{$tickets->firstItem()+$key}}</th>
+                              <td>{{zaman($ticket->created_at)}}</td>
+                              <td>{{$ticket->user->name}}</td>
+                              <td>{{$ticket->subject}}</td>
+                              <td>{{$ticket->department->name}}</td>
+                              <td>{{$ticket->priority_value}}</td>
+                              <td>{{$ticket->status_value}}</td>
+                              <td>
+                                  <a href="{{route('admin.tickets.show',$ticket->id)}}" class="btn btn-primary">نمایش</a>
+                                  <a href="#" class="btn btn-danger">حذف</a>
+                              </td>
+                            </tr>
+                            @endforeach
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>22/09/1349 12:18</td>
-                            <td>خظای فنی</td>
-                            <td>فنی</td>
-                            <td>بالا</td>
-                            <td>بی پاسخ</td>
-                            <td>
-                                <a href="#" class="btn btn-primary">نمایش</a>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>22/09/1349 12:18</td>
-                            <td>خظای فنی</td>
-                            <td>فنی</td>
-                            <td>بالا</td>
-                            <td>بی پاسخ</td>
-                            <td>
-                                <a href="#" class="btn btn-primary">نمایش</a>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-@endsection
+    @endsection
+    @section('script')
+        <script>
+            $('.select-filter').on('change', function() {
+                let target=$(this).attr('target');
+                if (this.value) {
+                  $(target).attr({'disabled':false,'value':this.value});
+                  //console.log( $(target).attr('id'));
+                }else{
+                    $(target).attr({'disabled':true});
+                }
+
+            });
+        </script>
+    @endsection

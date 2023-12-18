@@ -104,9 +104,9 @@ class TicketController extends Controller
             return redirect(url()->current());
         }
 
-        
+
         $messages=$ticket->messages;
-        $pastTime = Carbon::create($ticket->created_at)->diffForHumans(['parts' => 2]);
+        $pastTime = Carbon::create($ticket->updated_at)->diffForHumans(['parts' => 2]);
         return view('home.tickets.show', compact('ticket', 'pastTime','messages'));
     }
 

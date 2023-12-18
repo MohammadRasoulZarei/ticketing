@@ -1,10 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Home\TicketController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\TicketController as AdminTicket;
 
 /*
@@ -18,9 +20,8 @@ use App\Http\Controllers\Admin\TicketController as AdminTicket;
 |
 */
 Route::get('/test',function(){
-    //dd(Carbon::now()->format('Y_m_d_H_i_s_u'));
-  //  dd(auth()->user()->role);
-
+   $ticket=Ticket::find('3');
+   dd($ticket->department);
     //return view('home.tickets.show');
 })->middleware('admin');
 Route::get('/', function () {
@@ -39,7 +40,25 @@ Route::prefix('panel')->middleware('auth')->name('panel.')->group(function(){
     Route::match(['get', 'post'],'tickets/{ticket}',[TicketController::class,'show'])->name('tickets.show');
 });
 Route::prefix('admin')->middleware(['auth','admin'])->name('admin.')->group(function(){
-    Route::resource('tickets',AdminTicket::class);
+   Route::controller(AdminTicket::class)->name('tickets.')->group(function () {
+
+       Route::get('tickets','index')->name('index');
+       Route::match(['get', 'post'],'tickets/{ticket}','show')->name('show');
+   });
+   Route::prefix('departments')->controller(DepartmentController::class)->name('departments.')->group(function () {
+
+       Route::get('/','index')->name('index');
+       Route::post('/','store')->name('store');
+       Route::get('create','create')->name('create');
+
+       Route::get('delete/{department}','delete')->name('delete');
+       Route::get('choose','choose')->name('choose');
+       Route::get('set','set')->name('set');
+
+   });
+
+
+
 });
 
 Route::get('logout',function(){
