@@ -2,9 +2,10 @@
 
 use Carbon\Carbon;
 use App\Models\Ticket;
-use Illuminate\Support\Facades\Http;
+
+use App\Models\Message;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Home\TicketController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\TicketController as AdminTicket;
@@ -19,13 +20,12 @@ use App\Http\Controllers\Admin\TicketController as AdminTicket;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test',function(){
-   $ticket=Ticket::find('3');
-   dd($ticket->department);
-    //return view('home.tickets.show');
-})->middleware('admin');
+
 Route::get('/', function () {
     if (auth()->check()) {
+        if (auth()->user()->role=='admin') {
+            return to_route('admin.tickets.index');
+        }
         return to_route('panel.tickets.index');
     }else{
         return redirect('login');
@@ -44,6 +44,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->name('admin.')->group(func
 
        Route::get('tickets','index')->name('index');
        Route::match(['get', 'post'],'tickets/{ticket}','show')->name('show');
+       Route::get('tickets/{ticket}/close','close')->name('close');
    });
    Route::prefix('departments')->controller(DepartmentController::class)->name('departments.')->group(function () {
 

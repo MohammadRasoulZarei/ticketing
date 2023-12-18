@@ -16,7 +16,7 @@
                 <form action="{{route('admin.departments.set')}}" class="pt-5">
 
 
-                    <div style="display: flex ">
+                    <div class="d-flex justify-content-between flex-wrap">
                         @foreach ($departments  as $department )
 
                         <div class="form-check form-check-inline col-md-3 ">

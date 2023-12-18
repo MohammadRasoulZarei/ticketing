@@ -46,6 +46,7 @@ class DepartmentController extends Controller
     {
         $userDepIDs=auth()->user()->departments->pluck('id')->toArray();
         $departments=Department::latest()->get();
+     
         return view('admin.departments.choose',compact('departments','userDepIDs'));
     }
 

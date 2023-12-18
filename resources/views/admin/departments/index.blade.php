@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th scope="col">ردیف</th>
-                            <th scope="col">تاریخ شروع</th>
                             <th scope="col">واحد</th>
                             <th scope="col">عملیات</th>
                         </tr>
@@ -29,7 +28,6 @@
                         @foreach ($departments  as $key=> $department )
                         <tr>
                             <th scope="row">{{$key+1}}</th>
-                            <td>{{zaman($department->created_at)}}</td>
                             <td>{{$department->name}} </td>
                             <td>
                                 <a href="{{route('admin.departments.delete',$department->id)}}" class="btn btn-danger">حذف</a>

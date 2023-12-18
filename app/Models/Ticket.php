@@ -23,10 +23,10 @@ class Ticket extends Model
     public function getStatusValueAttribute(){
         switch ($this->status) {
             case 'closed':
-                return 'تکمیل شده';
+                return 'بسته';
                 break;
             case 'unanswered':
-                return 'بی جواب';
+                return 'درانتظار پاسخ';
                 break;
             case 'answered':
                 return 'پاسخ داده شده';
@@ -53,6 +53,10 @@ class Ticket extends Model
         return $this->hasMany(Message::class);
     }
     public function scopeFilter($query) {
+        if(request()->has('departments')){
+            $query->whereIn('department_id',request('departments'));
+        }
+
         if (request()->has('priority')) {
                 $query->where('priority',request('priority'));
         }

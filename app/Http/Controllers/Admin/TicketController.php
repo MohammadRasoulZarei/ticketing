@@ -16,7 +16,7 @@ class TicketController extends Controller
       // dd(request()->all());
     $userDepartments=auth()->user()->departments;
   //  $tickets=Ticket::whereIN("department_id",$userDeparments->pluck('id')->toArray())->;
-    $tickets=Ticket::whereIN("department_id",$userDepartments->pluck('id')->toArray())->filter()->paginate(5);
+    $tickets=Ticket::whereIN("department_id",$userDepartments->pluck('id')->toArray())->filter()->paginate(2);
         return view('admin.tickets.index',compact('userDepartments','tickets'));
     }
 
@@ -61,6 +61,13 @@ class TicketController extends Controller
         $messages=$ticket->messages;
         $pastTime = Carbon::create($ticket->updated_at)->diffForHumans(['parts' => 2]);
         return view('admin.tickets.show', compact('ticket', 'pastTime','messages'));
+    }
+    public function close(Ticket $ticket) {
+        $ticket->update([
+            'status'=>'closed'
+        ]);
+        alert()->success('تیکت خواسته شده بسته شد و دیگر امکان ارسال پیام وجود ندارد', 'با تشکر');
+        return to_route('admin.tickets.index');
     }
 
 }

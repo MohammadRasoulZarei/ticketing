@@ -8,7 +8,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">موضوع</label>
-                <input type="text" name="subject" class="form-control" id="inputEmail4" placeholder="موضوع">
+                <input type="text" name="subject" value="{{old('subject')}}" class="form-control" id="inputEmail4" placeholder="موضوع">
             </div>
             <div class="form-group col-md-6">
                 <div class="custom-file">

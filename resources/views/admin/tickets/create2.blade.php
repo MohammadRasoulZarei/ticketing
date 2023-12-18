@@ -3,26 +3,11 @@
 
 @section('content')
     <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <a href="{{url('test',22)}}" class="btn btn-primary"> دانلود فایل</a>
-            </div>
-            <div class="form-group col-md-6">
-                <div class="custom-file ">
-                    <label class="custom-file-label" for="customFileLang"> فایل ضمیمه</label>
-                    <input type="file" class="custom-file-input form-control" id="customFileLang" lang="es">
-                </div>
-            </div>
-        </div>
+
         <div class="clearfix"></div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <select class="custom-select  form-control-lg col-md-12 col-sm-12">
-                    <option selected>واحد مدنظر را انتخاب کنید</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <img src="{{url(env('ATTACHMENT_PATH').$file->attachment)}}" alt="">
             </div>
             <div class="form-group col-md-6">
                 <select class="custom-select  form-control-lg col-md-12 col-sm-12">

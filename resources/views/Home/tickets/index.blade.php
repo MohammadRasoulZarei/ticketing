@@ -28,7 +28,7 @@
               <td>{{$ticket->status_value}}</td>
               <td>
                   <a href="{{route('panel.tickets.show',$ticket->id)}}" class="btn btn-primary">نمایش</a>
-                  <a href="#" class="btn btn-danger">حذف</a>
+                
               </td>
             </tr>
             @endforeach
@@ -36,6 +36,9 @@
 
         </tbody>
       </table>
+      <div class="d-flex justify-content-center">
+        {{ $tickets->render() }}
+    </div>
 </div>
 
 @endsection
